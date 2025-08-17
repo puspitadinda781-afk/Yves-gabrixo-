@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      background-image: url('https://files.catbox.moe/zb65hz.jpg');
+      color: red;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lingkaran {
+      background-image: url('https://files.catbox.moe/xcenbq.jpg');
+      background-size: cover;
+      background-position: center;
+      width: 100px;
+      height: 100px;
+      border: 5px solid red;
+      border-radius: 100px;
+      position: absolute;
+      top: -70px;
+      left: 50%;
+      transform: translateX(-50%);
+      box-shadow: 0px 0px 10px red, 0px 0px 10px red;
+      cursor: pointer;
+    }
+
+    .container {
+      background: black;
+      border: 2px solid red;
+      border-radius: 10px;
+      padding: 80px 20px 10px;
+      position: relative;
+      box-shadow: 0px 0px 10px red, 0px 0px 10px red;
+      width: 400px;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    .links {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .href, .button {
+      background: black;
+      color: red;
+      border: 2px solid red;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 20px;
+      text-decoration: none;
+      box-shadow: 0px 0px 10px red, 0px 0px 10px red;
+      transition: background 0.3s, color 0.3s, transform 0.1s, box-shadow 0.1s;
+      font-size: 18px;
+      opacity: 0;
+      transform: translateX(100px);
+    }
+
+    .href:hover, .button:hover {
+      background: red;
+      color: black;
+    }
+
+    /* Efek klik (scale + glow) */
+    .href:active, .button:active {
+      transform: scale(0.95);
+      box-shadow: 0px 0px 20px red, 0px 0px 20px red;
+    }
+
+    .href::before {
+      content: "";
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .keterangan {background: black;
+      color: red;
+      border: 2px solid red;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 20px;
+      text-decoration: none;
+      box-shadow: 0px 0px 10px red, 0px 0px 10px red;
+      transition: background 0.3s, color 0.3s, transform 0.1s, box-shadow 0.1s;
+      font-size: 18px;
+      opacity: 0;
+      transform: translateX(100px);
+    }
+         
+
+    /* ICONS */
+    .whatsapp::before {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/733/733585.png');
+    }
+
+    .instagram::before {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/733/733558.png');
+    }
+
+    .discord::before {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/5968/5968756.png');
+    }
+
+    .telegram::before {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/2111/2111646.png');
+    }
+
+    /* animasi masuk */
+    @keyframes slideInLeft {
+      from { transform: translateX(-120%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(120%); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    .from-left {
+      animation: slideInLeft 1s forwards;
+    }
+
+    .from-right {
+      animation: slideInRight 1s forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="lingkaran"></div>
+    
+    <h1> Support Akun Ini</h1>
+
+    <div class="links">
+      <a href="https://chat.whatsapp.com/EWA3gI01UUO4R9QsXXj0YL" class="href whatsapp">WhatsApp</a>
+      <a href="https://chat.whatsapp.com/EWA3gI01UUO4R9QsXXj0YL" class="href instagram">Instagram</a>
+      <a href="https://chat.whatsapp.com/EWA3gI01UUO4R9QsXXj0YL" class="href discord">Discord</a>
+      <a href="https://chat.whatsapp.com/EWA3gI01UUO4R9QsXXj0YL" class="href telegram">Telegram</a>
+           <a href="#" class="keterangan"> Warning! <br>Waspada Kalo Klik Wa, <br>
+           banyak anomli yves </a>
+     
+    </div>
+  </div>
+
+  <!-- Efek suara klik -->
+  <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+
+  <script>
+    const buttons = document.querySelectorAll('.links a');
+    const clickSound = document.getElementById("clickSound");
+
+    buttons.forEach((btn, index) => {
+      // animasi masuk
+      setTimeout(() => {
+        if (index % 2 === 0) {
+          btn.classList.add('from-left');
+        } else {
+          btn.classList.add('from-right');
+        }
+      }, index * 200);
+
+      // efek klik + sound
+      btn.addEventListener("click", () => {
+        clickSound.currentTime = 0;
+        clickSound.play();
+      });
+    });
+  </script>
+</body>
+</html>
